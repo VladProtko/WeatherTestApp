@@ -3,17 +3,23 @@ import UIKit
 class ForecastVC: UIViewController {
     
     
-    @IBOutlet weak var tableViewForecast: UITableView!
+    
+    @IBOutlet weak var ForecastTablewView: UITableView!
     
    // var dataSource = [ModelWeather]()  { didSet{ self.tableViewForecast.reloadData() }}
-    var dataSourceTest = [ModelWeather(imageWeather: "sun.max", temperature: "22º", time: "13:00", changeNatural: "Clear")] //{ didSet{ self.tableViewForecast.reloadData() }}
+    var dataSourceTest = [ModelWeather(imageWeather: UIImage(systemName: "sun.max")!, temperature: "22ºC", time: "13:00", changeNatural: "Clear"),
+                          ModelWeather(imageWeather: UIImage(systemName: "sun.min")!, temperature: "20ºC", time: "16:00", changeNatural: "Sunny"),
+                          ModelWeather(imageWeather: UIImage(systemName: "cloud.sleet")!, temperature: "18ºC", time: "19:00", changeNatural: "Rainny"),
+                          ModelWeather(imageWeather: UIImage(systemName: "cloud.rain")!, temperature: "16ºC", time: "22:00", changeNatural: "Rainny")]
+    
+    //{ didSet{ self.tableViewForecast.reloadData() }}
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableViewForecast.dataSource = self
-        tableViewForecast.delegate = self
+       
+        ForecastTablewView.delegate = self
+        ForecastTablewView.dataSource = self
         
-
         addLabel()
         view.backgroundColor = .white
     
@@ -51,12 +57,25 @@ class ForecastVC: UIViewController {
 
     
     
+    
 }
 
 extension ForecastVC: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        
+        view.tintColor = .clear
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.textColor = .black
+   }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        
+        return "Today"
+    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 110
+        return 80
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -67,9 +86,11 @@ extension ForecastVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "ForecastTableViewCell",for: indexPath) as? ForecastTableViewCell
       //  cell.WeatherItemModel(item: dataSource[indexPath.row])
         cell?.WeatherItemModel(item: dataSourceTest[indexPath.row])
+        
         return cell ?? UITableViewCell()
     }
     

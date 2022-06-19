@@ -1,14 +1,45 @@
 import UIKit
 
 class TodayWeatherVC: UIViewController {
+    
+    
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
         addLabel()
         view.backgroundColor = .white
-
+        getWeather()
     }
     
+    
+    func getWeather() {
+        
+        guard let url = URL(string: "http://api.openweathermap.org/data/2.5/forecast?lat=35&lon=139&appid=258cda358540ba669325b98f90414068") else {return}
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        URLSession.shared.dataTask(with: request) { responseData, response, error in
+           // print(response)
+            if let error = error {
+             //   print(error.localizedDescription)
+            } else if let data = responseData {
+                let jsonString = String(data: data, encoding: .utf8)
+              //  print(jsonString)
+                
+                do {
+                    
+                    let json = try?  JSONDecoder().decode(DataWeather.self, from: data)
+                    print(json)
+                } catch {
+                    print(error)
+                }
+                }
+                
+            
+            
+        }.resume()
+    }
 
     func addLabel() {
         // labael - Today

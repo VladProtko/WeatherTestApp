@@ -11,7 +11,7 @@ class ForecastTableViewCell: UITableViewCell {
 
     func WeatherItemModel(item: ModelWeather) {
         
-        self.imageWeather.image = UIImage(named: item.imageWeather)
+        self.imageWeather.image = item.imageWeather
         self.temperature.text = item.temperature
         self.time.text = item.time
         self.changeNatural.text = item.changeNatural
