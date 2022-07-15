@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8462B27028816E6600920CF9 /* DirectionOfTheWind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8462B26F28816E6600920CF9 /* DirectionOfTheWind.swift */; };
+		8462B27228816F2A00920CF9 /* ChangeDegree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8462B27128816F2A00920CF9 /* ChangeDegree.swift */; };
 		846B7096281C341E00986DC1 /* DashBorderExtansionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846B7095281C341E00986DC1 /* DashBorderExtansionUIView.swift */; };
 		84945AD6285E296F0027772D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84945AD5285E296F0027772D /* NetworkManager.swift */; };
 		8494BB362859BF3A00719CA6 /* ForecastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8494BB352859BF3A00719CA6 /* ForecastTableViewCell.swift */; };
@@ -21,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8462B26F28816E6600920CF9 /* DirectionOfTheWind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionOfTheWind.swift; sourceTree = "<group>"; };
+		8462B27128816F2A00920CF9 /* ChangeDegree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeDegree.swift; sourceTree = "<group>"; };
 		846B7095281C341E00986DC1 /* DashBorderExtansionUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashBorderExtansionUIView.swift; sourceTree = "<group>"; };
 		84945AD5285E296F0027772D /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		8494BB352859BF3A00719CA6 /* ForecastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastTableViewCell.swift; sourceTree = "<group>"; };
@@ -47,10 +51,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8462B26D288168A000920CF9 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				84D217B8281BF19300D32F52 /* TodayWeatherVC.swift */,
+				84D217BA281BF39700D32F52 /* ForecastVC.swift */,
+				8494BB342859BF0200719CA6 /* TableViewCells */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		8462B26E288168FB00920CF9 /* Desing */ = {
+			isa = PBXGroup;
+			children = (
+				84D217AE281BD6A500D32F52 /* LaunchScreen.storyboard */,
+				84D217A9281BD6A100D32F52 /* Main.storyboard */,
+				84D217AC281BD6A500D32F52 /* Assets.xcassets */,
+			);
+			path = Desing;
+			sourceTree = "<group>";
+		};
 		846B7094281C33E100986DC1 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
 				846B7095281C341E00986DC1 /* DashBorderExtansionUIView.swift */,
+				8462B26F28816E6600920CF9 /* DirectionOfTheWind.swift */,
+				8462B27128816F2A00920CF9 /* ChangeDegree.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -98,16 +124,12 @@
 		84D217A2281BD6A000D32F52 /* WeatherTestApp */ = {
 			isa = PBXGroup;
 			children = (
+				84D217B7281BF12D00D32F52 /* App */,
+				8462B26D288168A000920CF9 /* ViewControllers */,
 				84945AD4285E29110027772D /* Network */,
 				8494BB372859C0DB00719CA6 /* Model */,
-				8494BB342859BF0200719CA6 /* TableViewCells */,
 				846B7094281C33E100986DC1 /* Helpers */,
-				84D217B7281BF12D00D32F52 /* App */,
-				84D217A9281BD6A100D32F52 /* Main.storyboard */,
-				84D217B8281BF19300D32F52 /* TodayWeatherVC.swift */,
-				84D217BA281BF39700D32F52 /* ForecastVC.swift */,
-				84D217AC281BD6A500D32F52 /* Assets.xcassets */,
-				84D217AE281BD6A500D32F52 /* LaunchScreen.storyboard */,
+				8462B26E288168FB00920CF9 /* Desing */,
 				84D217B1281BD6A500D32F52 /* Info.plist */,
 			);
 			path = WeatherTestApp;
@@ -200,7 +222,9 @@
 				84945AD6285E296F0027772D /* NetworkManager.swift in Sources */,
 				84D217A6281BD6A000D32F52 /* SceneDelegate.swift in Sources */,
 				8494BB392859C0F900719CA6 /* ModelWeather.swift in Sources */,
+				8462B27228816F2A00920CF9 /* ChangeDegree.swift in Sources */,
 				84D217BB281BF39700D32F52 /* ForecastVC.swift in Sources */,
+				8462B27028816E6600920CF9 /* DirectionOfTheWind.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
