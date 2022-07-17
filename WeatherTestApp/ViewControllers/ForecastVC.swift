@@ -2,40 +2,66 @@ import UIKit
 
 class ForecastVC: UIViewController {
     
+    @IBOutlet weak var ForecastTableView: UITableView!
     
-    
-    @IBOutlet weak var ForecastTablewView: UITableView!
-    
-   // var dataSource = [ModelWeather]()  { didSet{ self.tableViewForecast.reloadData() }}
-    var dataSourceTest = [ModelWeather(imageWeather: UIImage(systemName: "sun.max")!, temperature: "22ºC", time: "13:00", changeNatural: "Clear"),
-                          ModelWeather(imageWeather: UIImage(systemName: "sun.min")!, temperature: "20ºC", time: "16:00", changeNatural: "Sunny"),
-                          ModelWeather(imageWeather: UIImage(systemName: "cloud.sleet")!, temperature: "18ºC", time: "19:00", changeNatural: "Rainny"),
-                          ModelWeather(imageWeather: UIImage(systemName: "cloud.rain")!, temperature: "16ºC", time: "22:00", changeNatural: "Rainny")]
-    
-    //{ didSet{ self.tableViewForecast.reloadData() }}
-    
+    var dataSource: DataWeather? { didSet{ self.ForecastTableView.reloadData() }}
+       let changeDegree = ChangeDegree()
+
+   
     override func viewDidLoad() {
         super.viewDidLoad()
-       
-        ForecastTablewView.delegate = self
-        ForecastTablewView.dataSource = self
-        
+        ForecastTableView.delegate = self
+        ForecastTableView.dataSource = self
+        loadWeather()
         addLabel()
         view.backgroundColor = .white
-    
+        
     }
     
     
+    private func loadWeather() {
+        NetworkManager.loadWeather { [weak self] weather, error in
+            if let weather = weather {
+                DispatchQueue.main.async { [weak self] in
+                    self?.dataSource = weather
+                   
+                }
+            } else if  let error = error {
+                print(error.localizedDescription)
+            }
+        }
+    }
+
+    
+    func changeDegrees2(temp: Double) -> String {
+      
+      let changeCelsius = temp - 273.15
+      let celsius = Int(changeCelsius)
+      
+      return "\(celsius)"
+      
+    
+}
     
     func addLabel() {
+        
         // labael - Forecast
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 25))
+        let label = UILabel(frame: CGRect(x: 0,
+                                          y: 0,
+                                          width: 200,
+                                          height: 25))
+        
         label.center = CGPoint(x: view.frame.width / 2, y: view.frame.minY + label.frame.height * 2)
         label.textAlignment = .center
         label.text = "Forecast"
         self.view.addSubview(label)
+        
         //  setup lineMulticolors
-        let labelLineColor = UILabel(frame: CGRect(x: 0, y: (view.frame.minY + label.frame.height * 2) + 25, width: UIScreen.main.bounds.width + 120, height: 3))
+        let labelLineColor = UILabel(frame: CGRect(x: 0,
+                                                   y: (view.frame.minY + label.frame.height * 2) + 25,
+                                                   width: UIScreen.main.bounds.width + 120,
+                                                   height: 3))
+        
         labelLineColor.textAlignment = .right
         labelLineColor.font = UIFont.systemFont(ofSize: 15, weight: .heavy)
         labelLineColor.backgroundColor = .lightGray
@@ -52,12 +78,8 @@ class ForecastVC: UIViewController {
 
         labelLineColor.attributedText = attrString
         
-       
     }
 
-    
-    
-    
 }
 
 extension ForecastVC: UITableViewDelegate, UITableViewDataSource {
@@ -70,7 +92,6 @@ extension ForecastVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
-        
         return "Today"
     }
     
@@ -80,7 +101,7 @@ extension ForecastVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return dataSourceTest.count
+        return 1
         
     }
     
@@ -88,8 +109,11 @@ extension ForecastVC: UITableViewDelegate, UITableViewDataSource {
         
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ForecastTableViewCell",for: indexPath) as? ForecastTableViewCell
-      //  cell.WeatherItemModel(item: dataSource[indexPath.row])
-        cell?.WeatherItemModel(item: dataSourceTest[indexPath.row])
+        
+        var cellsian = changeDegree.changeDegrees(temp: (dataSource?.list.first?.main?.temp ?? 0))
+        
+        cell?.checkCount(cellsian: &cellsian)
+        cell?.temperature.text = "+\(cellsian) Cº"
         
         return cell ?? UITableViewCell()
     }
