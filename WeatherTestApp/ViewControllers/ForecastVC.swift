@@ -1,26 +1,39 @@
 import UIKit
+import CoreLocation
 
-class ForecastVC: UIViewController {
+class ForecastVC: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet weak var ForecastTableView: UITableView!
     
     var dataSource: DataWeather? { didSet{ self.ForecastTableView.reloadData() }}
-       let changeDegree = ChangeDegree()
+    private let locationManager: CLLocationManager = CLLocationManager()
+    private var coordinat = CLLocationCoordinate2D() { didSet { getLocation()}}
+
+  //  private lazy var locationService: LoacationManagerProtocol = LocationManager()
+
 
    
     override func viewDidLoad() {
         super.viewDidLoad()
         ForecastTableView.delegate = self
         ForecastTableView.dataSource = self
-        loadWeather()
+       // loadWeather()
         addLabel()
         view.backgroundColor = .white
         
     }
     
+    func getLocation() -> CLLocationCoordinate2D? {
+        locationManager.requestWhenInUseAuthorization()
+        
+        return locationManager.location?.coordinate
+        
+    }
     
     private func loadWeather() {
-        NetworkManager.loadWeather { [weak self] weather, error in
+        
+       // guard let coordinates = locationService.getLocation() else { return }
+        NetworkManager.loadWeather(for: coordinat) { [weak self] weather, error in
             if let weather = weather {
                 DispatchQueue.main.async { [weak self] in
                     self?.dataSource = weather
@@ -32,16 +45,7 @@ class ForecastVC: UIViewController {
         }
     }
 
-    
-    func changeDegrees2(temp: Double) -> String {
-      
-      let changeCelsius = temp - 273.15
-      let celsius = Int(changeCelsius)
-      
-      return "\(celsius)"
-      
-    
-}
+
     
     func addLabel() {
         
@@ -110,9 +114,8 @@ extension ForecastVC: UITableViewDelegate, UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ForecastTableViewCell",for: indexPath) as? ForecastTableViewCell
         
-        var cellsian = changeDegree.changeDegrees(temp: (dataSource?.list.first?.main?.temp ?? 0))
+        let cellsian =  Int(dataSource?.list.first?.main?.temp ?? 0)
         
-        cell?.checkCount(cellsian: &cellsian)
         cell?.temperature.text = "+\(cellsian) Cº"
         
         return cell ?? UITableViewCell()

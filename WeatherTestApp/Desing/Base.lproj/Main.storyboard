@@ -104,13 +104,22 @@
             </objects>
             <point key="canvasLocation" x="-1449.2753623188407" y="-91.071428571428569"/>
         </scene>
-        <!--Today WeatherVC-->
+        <!--Today Weather Controller-->
         <scene sceneID="mta-F7-War">
             <objects>
-                <viewController id="74g-Ir-gP6" customClass="TodayWeatherVC" customModule="WeatherTestApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="N0b-Z2-iYp">
+                <viewController id="74g-Ir-gP6" customClass="TodayWeatherController" customModule="WeatherTestApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="N0b-Z2-iYp" customClass="TodayWeatherView" customModule="WeatherTestApp" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jrt-r7-qOT">
+                                <rect key="frame" x="186" y="15" width="100" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="2Tz-YQ-rIo"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
