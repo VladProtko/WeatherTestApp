@@ -1,6 +1,8 @@
 import Foundation
+import UIKit
 
 class Utility {
+    
     
     func directionOfTheWind(direction: Double) -> String {
         

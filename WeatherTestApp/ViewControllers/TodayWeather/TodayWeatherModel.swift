@@ -16,7 +16,8 @@ protocol TodayWeatherModelProtocol {
     
     
     var coordinate: CLLocationCoordinate2D? { get }
-    var imageWeatherConditons: String {get}
+    var imageWeatherConditonsRain: String {get}
+    var imageWeatherConditonsSunny: String { get }
     var locationManager: CLLocationManager { get }
     var utility: Utility { get }
 }
@@ -28,8 +29,8 @@ class TodayWeatherModel: TodayWeatherModelProtocol {
     var drop: String = "drop"
     var location: String = "location"
     var escape: String = "escape"
-    var imageWeatherConditons: String = "cloud.heavyrain"
-    
+    var imageWeatherConditonsRain: String = "cloud.heavyrain"
+    var imageWeatherConditonsSunny: String = "sun.max"
     
     var utility: Utility = Utility()
     
